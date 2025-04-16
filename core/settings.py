@@ -1,9 +1,13 @@
 
-# from django.conf.global_settings import INSTALLED_APPS, AUTH_USER_MODEL
+# from django.conf.global_settings import AUTH_USER_MODEL
+
+from pathlib import Path
+
 
 from dotenv import load_dotenv
 load_dotenv()
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
@@ -12,6 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'rest_framework',
     'rest_framework.authtoken',
+    'api',
 ]
 
 
@@ -23,3 +28,13 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+AUTH_USER_MODEL = 'api.User'

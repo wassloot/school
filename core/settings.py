@@ -10,7 +10,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS','localhost').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -55,3 +55,14 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+
+
+
+LANGUAGE_CODE = 'ru'
+
+TIME_ZONE = 'Asia/Bishkek'
+
+USE_I18N = True
+
+USE_TZ = True

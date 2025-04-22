@@ -1,7 +1,7 @@
 from rest_framework import viewsets
-from models import Room, Booking, Resource
-from serializers import RoomSerializer, BookingSerializer, ResourceSerializer
-from permissions import IsAdminOrOwner
+from .models import Room, Booking, Resource
+from .serializers import RoomSerializer, BookingSerializer, ResourceSerializer
+from .permissions import IsAdminOrOwner
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import permissions
 

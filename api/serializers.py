@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Room, Booking, User, Resource
+from .models import Room, Booking, User, Resource
 
 
 class RoomSerializer(serializers.ModelSerializer):

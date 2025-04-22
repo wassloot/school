@@ -10,15 +10,50 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS','localhost').split(',')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+
+ROOT_URLCONF = 'core.urls'
+
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
+
 
 INSTALLED_APPS = [
     'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'rest_framework',
     'rest_framework.authtoken',
+    'django.contrib.messages',
     'api',
 ]
+
+
+MIDDLEWARE = [
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+]
+
+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 
 
 REST_FRAMEWORK = {
@@ -56,7 +91,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LANGUAGE_CODE = 'ru'

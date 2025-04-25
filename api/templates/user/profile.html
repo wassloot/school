@@ -1,0 +1,62 @@
+{% extends 'booking/base.html' %}
+{% block title %}Профиль{% endblock %}
+{% block content %}
+<div class="profile-container">
+    <h2>Профиль пользователя {{ user.username }}</h2>
+    <p>Имя: {{ user.first_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Роль: {{ user.role }}</p>
+    <p><a href="{% url 'booking_list' %}">Мои бронирования</a></p>
+</div>
+{% endblock %}
+
+<style>
+    body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+a {
+    color: #0077cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    color: #222;
+}
+
+main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Профиль пользователя */
+.profile-container {
+    background-color: #fff;
+    padding: 20px 25px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+}
+
+.profile-container h2 {
+    margin-top: 0;
+    color: #0077cc;
+    font-size: 24px;
+}
+
+.profile-container p {
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+</style>

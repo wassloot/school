@@ -7,6 +7,10 @@ from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv()
 
+
+DEBUG = True
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -16,32 +20,33 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 ROOT_URLCONF = 'core.urls'
 
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.admin',
     'django.contrib.contenttypes',
+    'django.contrib.sessions',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.messages',
+    'drf_spectacular',
     'api',
 ]
 
 
 MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 
-
 TEMPLATES = [
-    {
+{
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -56,14 +61,21 @@ TEMPLATES = [
 
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'My API',
+    'DESCRIPTION': 'API documentation',
+    'VERSION': '1.0.0',
+    'CONTACT': {'name': 'Support', 'email': 'support@example.com'},
+    'LICENSE': {'name': 'MIT', 'url': 'https://opensource.org/licenses/MIT'},
+    'SERVE_INCLUDE_SCHEMA': False,
 }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
 
 
 DATABASES = {
@@ -73,7 +85,18 @@ DATABASES = {
     },
 }
 
+
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+
+
 AUTH_USER_MODEL = 'api.User'
+
+LOGIN_REDIRECT_URL = '/profile/'
+LOGOUT_REDIRECT_URL = '/login/'
+
 
 
 REDIS_HOST = os.environ.get('REDIS_HOST', default=r'localhost')

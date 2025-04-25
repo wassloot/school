@@ -5,6 +5,10 @@ djangorestframework==3.16.0
 dotenv==0.9.9
 celery==5.5.1
 requests==2.32.3
+drf-spectacular==0.28.0
+
+
+
 
 
 
